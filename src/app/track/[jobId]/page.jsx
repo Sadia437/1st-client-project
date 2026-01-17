@@ -1,12 +1,12 @@
 'use client';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { use } from 'react'; // React 'use' হুক ব্যবহার করুন
+import { use } from 'react'; 
 
 const containerStyle = { width: '100%', height: '100vh' };
 const center = { lat: 38.3498, lng: -81.6326 }; 
 
 export default function TrackPage({ params }) {
-  // Params আনল্যাপ করা (Next.js 14/15 এর জন্য জরুরি)
+ 
   const resolvedParams = use(params);
   const jobId = resolvedParams.jobId;
 
@@ -19,7 +19,7 @@ export default function TrackPage({ params }) {
           <Marker position={techLocation} />
         </GoogleMap>
         
-        {/* তথ্য কার্ড */}
+      
         <div className="absolute bottom-10 left-4 right-4 bg-white p-6 rounded-2xl shadow-2xl border border-slate-100 max-w-md mx-auto">
           <div className="flex items-center gap-4 mb-4">
              <div className="w-12 h-12 bg-slate-200 rounded-full overflow-hidden">

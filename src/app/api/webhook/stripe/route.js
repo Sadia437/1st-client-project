@@ -3,10 +3,10 @@ import Stripe from 'stripe';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Resend } from 'resend';
 
-// বিল্ডের সময় স্ট্যাটিক এরর এড়াতে এটি অত্যন্ত জরুরি
+
 export const dynamic = 'force-dynamic';
 
-// এনভায়রনমেন্ট ভ্যারিয়েবলগুলো ডিফাইন করা (ফালব্যাক ভ্যালুসহ যাতে বিল্ড ক্রাশ না করে)
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_mock');
 const resend = new Resend(process.env.RESEND_API_KEY || 're_mock_123');
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || 'AIza_mock');
@@ -18,7 +18,7 @@ export async function POST(req) {
     let event;
 
     try {
-        // সিগনেচার ভেরিফিকেশন
+       
         event = stripe.webhooks.constructEvent(payload, signature, webhookSecret);
     } catch (err) {
         console.error("Webhook Signature Error:", err.message);
@@ -34,7 +34,7 @@ export async function POST(req) {
         const isMember = session.metadata?.isMember === 'true';
 
         try {
-            // ১. কাস্টমার আপডেট বা ইনসার্ট
+           
             const { data: customer } = await supabase
                 .from('customers')
                 .select('*')
@@ -58,7 +58,7 @@ export async function POST(req) {
                 customerId = newCust.customer_id;
             }
 
-            // ২. পার্টনার ডিসপ্যাচ লজিক (জিপ কোড ম্যাচিং)
+            
             const zipMatch = locationString.match(/\b\d{5}\b/);
             if (zipMatch) {
                 const { data: partner } = await supabase
@@ -77,7 +77,7 @@ export async function POST(req) {
                         status: 'Dispatched' 
                     });
 
-                    // ৩. এআই দিয়ে ইমেইল জেনারেট করা
+                   
                     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
                     const prompt = `Write a professional dispatch email to ${partner.company_name}. 
                                    Job Address: ${locationString}. 
@@ -87,7 +87,7 @@ export async function POST(req) {
                     const result = await model.generateContent(prompt);
                     const emailContent = result.response.text();
                     
-                    // ৪. ইমেইল পাঠানো (যদি API Key থাকে)
+                  
                     if (process.env.RESEND_API_KEY) {
                         await resend.emails.send({
                             from: 'dispatch@electricdrs.com',
@@ -100,7 +100,7 @@ export async function POST(req) {
             }
         } catch (dbError) {
             console.error("Database or AI Error:", dbError);
-            // আমরা ২০০ পাঠাচ্ছি যাতে স্ট্রাইপ বারবার রিট্রাই না করে, কিন্তু লগ রাখছি
+           ছি
         }
     }
 

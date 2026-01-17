@@ -27,12 +27,12 @@ export default function Home() {
       <div className="container mx-auto p-4 md:p-10">
         {!userLocation ? (
           <div className="space-y-16">
-            {/* জিপ কোড ইনপুট (Screenshot 2) */}
+          
             <div className="flex items-center justify-center py-10">
               <ServiceIntake onLocationSet={(loc) => setUserLocation(loc)} />
             </div>
 
-            {/* সার্ভিস কার্ডস (Client's choice request) */}
+          
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center">
                 <Zap className="mx-auto text-yellow-500 mb-4" size={32} />
@@ -52,7 +52,7 @@ export default function Home() {
             </div>
           </div>
         ) : (
-          /* জিপ কোড দেওয়ার পর ডাইনামিক ইন্টারফেস (Screenshot 5) */
+          
           <div className="animate-in fade-in duration-700 space-y-12">
             <div id="amanda-chat-box" className="max-w-4xl mx-auto">
               <div className="flex justify-between items-center mb-4 px-2">
@@ -62,7 +62,7 @@ export default function Home() {
               <AmandaChat location={userLocation} />
             </div>
 
-            {/* জেনারেটর সেকশন (Screenshot 5) */}
+            
             <section className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-4xl mx-auto">
               <h2 className="text-2xl font-black text-slate-900 mb-2">Whole-Home Backup Generators</h2>
               <p className="text-slate-600 mb-6">Custom solutions for {userLocation}. Never lose power again.</p>
@@ -71,7 +71,7 @@ export default function Home() {
               </button>
             </section>
 
-            {/* বুকিং ক্যালেন্ডার (Emergency-Electric-Repair... Screenshot) */}
+            
             <section className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-4xl mx-auto">
               <h2 className="text-2xl font-black text-slate-900 mb-6">Schedule Service in {userLocation}</h2>
               <div className="w-full h-[600px] rounded-xl overflow-hidden border border-slate-100">

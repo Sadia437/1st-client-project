@@ -19,7 +19,7 @@ export default function InstallAppButton() {
     if (outcome === 'accepted') setDeferredPrompt(null);
   };
 
-  if (!deferredPrompt) return null; // Don't show if already installed
+  if (!deferredPrompt) return null; 
 
   return (
     <button 

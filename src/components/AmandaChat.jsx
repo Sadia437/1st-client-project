@@ -50,7 +50,7 @@ export default function AmandaChat({ location }) {
       const data = await res.text();
       setMessages(prev => [...prev, { id: Date.now() + 1, role: 'assistant', content: data }]);
     } catch (error) { 
-      // সিস্টেম অফলাইন থাকলে ক্লায়েন্টের দেওয়া নম্বরটি দেখাবে (Screenshot 4 অনুযায়ী)
+      
       setMessages(prev => [...prev, { 
         id: Date.now() + 1, 
         role: 'assistant', 

@@ -6,7 +6,7 @@ import { Send, Bot, Factory, Loader2 } from 'lucide-react';
 export default function CommercialPage() {
   const [messages, setMessages] = useState([{ id: 1, role: 'assistant', content: "I am Agent Grey. Tell me about your facility." }]);
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false); // লোডিং স্টেট যুক্ত করা হয়েছে
+  const [loading, setLoading] = useState(false); 
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function CommercialPage() {
         body: JSON.stringify({ messages: [...messages, userMsg] }) 
       });
       
-      // বিল্ড এরর ফিক্স: ডাটা আলাদা ভেরিয়েবলে নিয়ে তারপর সেট করা হয়েছে
+     
       const data = await res.text(); 
       setMessages(prev => [...prev, { id: Date.now() + 1, role: 'assistant', content: data }]);
     } catch (error) {
